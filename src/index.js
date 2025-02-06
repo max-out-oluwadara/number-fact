@@ -1,15 +1,19 @@
-// src/index.js
 const express = require('express');
-const cors = require('cors'); // Import cors middleware
-const app = express();
-const port = 3000;
+const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config(); // Load environment variables
+
 const numberClassificationRoutes = require('./routes/numberClassificationRoutes');
 
-// Enable CORS with default settings (allows all origins)
-app.use(cors());
+const app = express();
 
-// Enable JSON parsing middleware
+// Middleware
 app.use(express.json());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}));
 
 // Register API routes
 app.use('/api', numberClassificationRoutes);
@@ -30,7 +34,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// For local development
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
+
+// For Vercel or other serverless platforms
+module.exports = app;
