@@ -16,8 +16,9 @@ const NumberClassificationHelper = {
     // Check if a number is even
     isEven: (number) => number % 2 === 0,
   
-    // Calculate the sum of the digits
+    // Calculate the sum of the digits (Ensure it returns 0 for negative numbers)
     calculateDigitSum: (number) => {
+      if (number < 0) return 0; // Fix for negative input
       return number
         .toString()
         .split('')
@@ -33,8 +34,9 @@ const NumberClassificationHelper = {
       return true;
     },
   
-    // Check if a number is perfect
+    // Check if a number is perfect (Ensure 0 is not classified as perfect)
     isPerfect: (number) => {
+      if (number <= 0) return false; // Fix for 0
       let sum = 0;
       for (let i = 1; i < number; i++) {
         if (number % i === 0) sum += i;
@@ -44,4 +46,3 @@ const NumberClassificationHelper = {
   };
   
   module.exports = NumberClassificationHelper;
-  

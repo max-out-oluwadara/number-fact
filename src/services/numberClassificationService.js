@@ -42,7 +42,7 @@ const NumberClassificationService = {
         is_prime: classificationData.isPrime,
         is_perfect: classificationData.isPerfect,
         properties: classificationData.properties,
-        digit_sum: classificationData.digitSum,
+        digit_sum: classificationData.digitSum, // Ensure digit sum is always numeric
         fun_fact: funFact,
       };
     } catch (error) {
@@ -52,7 +52,7 @@ const NumberClassificationService = {
         is_prime: classificationData.isPrime,
         is_perfect: classificationData.isPerfect,
         properties: classificationData.properties,
-        digit_sum: classificationData.digitSum,
+        digit_sum: classificationData.digitSum, // Ensure digit sum is always numeric
         fun_fact: "Fun fact unavailable",
       };
     }
